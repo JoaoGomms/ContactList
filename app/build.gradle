@@ -39,27 +39,27 @@ dependencies {
 
     // Navigation Component
     def navigation_version = '2.3.5'
-    implementation 'androidx.navigation:navigation-fragment-ktx:navigation_version'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
 
     // Room components
     def room_version = "2.3.0"
-    implementation "androidx.room:room-runtime:room_version"
-    kapt "androidx.room:room-compiler:room_version"
-    implementation "androidx.room:room-ktx:room_version"
-    androidTestImplementation "androidx.room:room-testing:room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
     def lifecycle_version = "2.3.1"
-    implementation "androidx.lifecycle:lifecycle-common-java8:lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     //Coroutines
     def coroutines_version = "1.5.1"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:coroutines_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // Kotlin components
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30"
