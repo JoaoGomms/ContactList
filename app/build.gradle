@@ -18,6 +18,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures{
+        viewBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -34,7 +38,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 
     // Navigation Component
