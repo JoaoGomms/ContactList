@@ -29,20 +29,14 @@ class AddFragment : Fragment() {
 
         _binding = FragmentAddBinding.inflate(layoutInflater)
 
-
-
         binding.btnAdd.setOnClickListener{
-
             insertDatatoDatabase()
-
         }
-
         return binding.root
-
-
     }
 
     private fun insertDatatoDatabase() {
+
         val firstName = binding.editTextFirstName.text.toString()
         val lastName = binding.editTextLastName.text.toString()
         val age = binding.editTextAge.text
@@ -58,12 +52,8 @@ class AddFragment : Fragment() {
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
 
         } else {
-
             Toast.makeText(requireContext(), "Campos nao podem ser vazios", Toast.LENGTH_SHORT).show()
-
         }
-
-
     }
 
     private fun inputCheck(firstName: String, lastName: String, age: Editable): Boolean{
