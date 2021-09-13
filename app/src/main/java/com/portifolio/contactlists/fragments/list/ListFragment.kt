@@ -5,12 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.portifolio.contactlists.R
+import com.portifolio.contactlists.adapter.ContactAdapter
+import com.portifolio.contactlists.data.UserViewModel
 import com.portifolio.contactlists.databinding.FragmentListBinding
 
 
 class ListFragment : Fragment() {
+
+    private val userViewModel: UserViewModel by viewModels()
+    private val contactListAdapter by lazy { ContactAdapter() }
 
     private var _binding : FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -19,16 +27,30 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        //val view = inflater.inflate(R.layout.fragment_list, container, false)
+
         _binding = FragmentListBinding.inflate(layoutInflater)
 
         binding.floatingActionButton.setOnClickListener{
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
+        initObservers()
+        setupRecyclerView()
+
+
         return binding.root;
 
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerView.adapter = contactListAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun initObservers(){
+        userViewModel.getReadAllData().observe(viewLifecycleOwner, {
+            contactListAdapter.setData(it)
+        })
     }
 
     override fun onDestroy() {

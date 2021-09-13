@@ -13,6 +13,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     private val readAllData: LiveData<List<UserEntity>>
     private val repository: UserRepository
 
+    fun getReadAllData() = readAllData
+
 
     init {
         val userDao = UserDatabase.getDatabase(application).userDao()
