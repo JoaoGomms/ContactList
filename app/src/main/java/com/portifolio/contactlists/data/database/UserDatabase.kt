@@ -1,12 +1,11 @@
 package com.portifolio.contactlists.data.database
 
 import android.content.Context
-import android.service.autofill.UserData
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.portifolio.contactlists.data.UserDao
-import com.portifolio.contactlists.data.UserEntity
+import com.portifolio.contactlists.data.dao.UserDao
+import com.portifolio.contactlists.data.model.UserEntity
 
 @Database(entities = [UserEntity::class], version = 1, exportSchema = false)
 abstract class UserDatabase : RoomDatabase() {
