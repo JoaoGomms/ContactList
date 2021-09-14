@@ -1,10 +1,12 @@
-package com.portifolio.contactlists.data
+package com.portifolio.contactlists.data.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.portifolio.contactlists.data.repository.UserRepository
 import com.portifolio.contactlists.data.database.UserDatabase
+import com.portifolio.contactlists.data.model.UserEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,6 +28,20 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addUser(user)
         }
+    }
+
+    fun updateUser(user: UserEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateUSer(user)
+        }
+    }
+
+    fun deleteUser(user: UserEntity){
+        viewModelScope.launch(Dispatchers.IO) { repository.deleteUser(user) }
+    }
+
+    fun deleteAllUsers(){
+        viewModelScope.launch(Dispatchers.IO) { repository.deleteAllUsers() }
     }
 
 
