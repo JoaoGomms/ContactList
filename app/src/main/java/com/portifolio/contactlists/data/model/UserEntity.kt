@@ -1,9 +1,11 @@
-package com.portifolio.contactlists.data
+package com.portifolio.contactlists.data.model
 
-import androidx.room.ColumnInfo
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "user")
 data class UserEntity(
 
@@ -13,4 +15,4 @@ data class UserEntity(
     val lastName: String,
     val age: Int
 
-)
+) : Parcelable
