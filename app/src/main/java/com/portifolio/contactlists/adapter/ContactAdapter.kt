@@ -2,9 +2,11 @@ package com.portifolio.contactlists.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.portifolio.contactlists.data.UserEntity
+import com.portifolio.contactlists.data.model.UserEntity
 import com.portifolio.contactlists.databinding.CustomRowBinding
+import com.portifolio.contactlists.fragments.list.ListFragmentDirections
 
 class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
@@ -19,10 +21,17 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.idTextView.text = contactList[position].id.toString()
-        holder.binding.firstNameTextView.text = contactList[position].firstName
-        holder.binding.lastNameTextView.text = contactList[position].lastName
-        holder.binding.ageTextView.text = contactList[position].age.toString()
+        val currentUser = contactList[position]
+
+        holder.binding.idTextView.text = currentUser.id.toString()
+        holder.binding.firstNameTextView.text = currentUser.firstName
+        holder.binding.lastNameTextView.text = currentUser.lastName
+        holder.binding.ageTextView.text = currentUser.age.toString()
+
+        holder.binding.rowLayout.setOnClickListener{
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentUser)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int = contactList.size
