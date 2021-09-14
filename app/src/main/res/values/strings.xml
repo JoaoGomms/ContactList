@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ContactLists</string>
+    <string name="delete_all">Delete All</string>
 </resources>
