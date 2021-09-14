@@ -10,9 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.portifolio.contactlists.R
-import com.portifolio.contactlists.data.UserEntity
-import com.portifolio.contactlists.data.UserViewModel
+import com.portifolio.contactlists.data.model.UserEntity
+import com.portifolio.contactlists.data.viewmodel.UserViewModel
 import com.portifolio.contactlists.databinding.FragmentAddBinding
 
 class AddFragment : Fragment() {
@@ -49,7 +48,8 @@ class AddFragment : Fragment() {
 
             Toast.makeText(requireContext(), "Adicionado", Toast.LENGTH_SHORT).show()
 
-            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+            val action = AddFragmentDirections.actionAddFragmentToListFragment()
+            findNavController().navigate(action)
 
         } else {
             Toast.makeText(requireContext(), "Campos nao podem ser vazios", Toast.LENGTH_SHORT).show()
