@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.portifolio.contactlists.data.Converters
 import com.portifolio.contactlists.data.dao.UserDao
 import com.portifolio.contactlists.data.model.UserEntity
 
-@Database(entities = [UserEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UserEntity::class], version = 2, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
@@ -30,7 +33,8 @@ abstract class UserDatabase : RoomDatabase() {
                     context.applicationContext,
                     UserDatabase::class.java,
                     "user_database"
-                ).build()
+                //FIXME: Refactor .fallbackToDestructiveMigrationOnDowngrade() to Migration
+                ).fallbackToDestructiveMigrationOnDowngrade().build()
                 INSTANCE = instance
                 return instance
             }

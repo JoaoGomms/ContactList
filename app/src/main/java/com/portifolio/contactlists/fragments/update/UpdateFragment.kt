@@ -8,13 +8,16 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.portifolio.contactlists.R
+import com.portifolio.contactlists.data.ImageToBitmap
 import com.portifolio.contactlists.data.model.UserEntity
 import com.portifolio.contactlists.data.viewmodel.UserViewModel
 import com.portifolio.contactlists.databinding.FragmentUpdateBinding
+import kotlinx.coroutines.launch
 
 class UpdateFragment : Fragment() {
     
@@ -57,9 +60,12 @@ class UpdateFragment : Fragment() {
 
             if (inputCheck(firstName, lastName, binding.editTextUpdateAge.text)){
 
-                val updatedUser = UserEntity(args.currentUser.id, firstName, lastName, age)
+                lifecycleScope.launch {
+                    val updatedUser = UserEntity(args.currentUser.id, firstName, lastName, age, ImageToBitmap.getImageBitmap(requireContext()))
 
-                userViewModel.updateUser(updatedUser)
+                    userViewModel.updateUser(updatedUser)
+                }
+
 
                 Toast.makeText(requireContext(), "User Updated", Toast.LENGTH_SHORT).show()
 

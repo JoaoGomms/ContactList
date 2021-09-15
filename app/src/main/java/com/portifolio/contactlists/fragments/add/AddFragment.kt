@@ -9,10 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.portifolio.contactlists.data.ImageToBitmap
 import com.portifolio.contactlists.data.model.UserEntity
 import com.portifolio.contactlists.data.viewmodel.UserViewModel
 import com.portifolio.contactlists.databinding.FragmentAddBinding
+import kotlinx.coroutines.launch
 
 class AddFragment : Fragment() {
 
@@ -42,9 +45,11 @@ class AddFragment : Fragment() {
 
         if(inputCheck(firstName, lastName, age)){
 
-            val user = UserEntity(0, firstName, lastName, Integer.parseInt(age.toString()))
+            lifecycleScope.launch {
+                val user = UserEntity(0, firstName, lastName, Integer.parseInt(age.toString()), ImageToBitmap.getImageBitmap(requireContext()))
 
-            mUserViewModel.addUser(user)
+                mUserViewModel.addUser(user)
+            }
 
             Toast.makeText(requireContext(), "Adicionado", Toast.LENGTH_SHORT).show()
 
