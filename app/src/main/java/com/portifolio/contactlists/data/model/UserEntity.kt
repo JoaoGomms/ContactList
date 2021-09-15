@@ -1,5 +1,6 @@
 package com.portifolio.contactlists.data.model
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -13,6 +14,7 @@ data class UserEntity(
     val id: Int,
     val firstName: String,
     val lastName: String,
-    val age: Int
+    val age: Int,
+    val photo: Bitmap
 
 ) : Parcelable
