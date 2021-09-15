@@ -3,6 +3,7 @@ package com.portifolio.contactlists.data.repository
 import androidx.lifecycle.LiveData
 import com.portifolio.contactlists.data.dao.UserDao
 import com.portifolio.contactlists.data.model.UserEntity
+import kotlinx.coroutines.flow.Flow
 
 class UserRepository(private val userDao: UserDao) {
 
@@ -24,6 +25,9 @@ class UserRepository(private val userDao: UserDao) {
         userDao.deleteAllUsers()
     }
 
+    fun searchDatabase(searchQuery: String): Flow<List<UserEntity>> {
+        return userDao.searchDatabase(searchQuery)
+    }
 
 
 }

@@ -3,6 +3,7 @@ package com.portifolio.contactlists.data.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.portifolio.contactlists.data.repository.UserRepository
 import com.portifolio.contactlists.data.database.UserDatabase
@@ -42,6 +43,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteAllUsers(){
         viewModelScope.launch(Dispatchers.IO) { repository.deleteAllUsers() }
+    }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<UserEntity>>{
+        return repository.searchDatabase(searchQuery).asLiveData()
     }
 
 

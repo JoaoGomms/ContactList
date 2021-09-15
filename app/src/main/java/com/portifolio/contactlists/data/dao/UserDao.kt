@@ -3,6 +3,7 @@ package com.portifolio.contactlists.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.portifolio.contactlists.data.model.UserEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
@@ -21,5 +22,8 @@ interface UserDao {
 
     @Query("DELETE FROM user")
     suspend fun deleteAllUsers()
+
+    @Query("SELECT * FROM user WHERE firstName LIKE :searchQuery OR lastName LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): Flow<List<UserEntity>>
 
 }
