@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,7 @@ import com.portifolio.contactlists.data.viewmodel.UserViewModel
 import com.portifolio.contactlists.databinding.FragmentListBinding
 
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), SearchView.OnQueryTextListener{
 
     private val userViewModel: UserViewModel by viewModels()
     private val contactListAdapter by lazy { ContactAdapter() }
@@ -61,6 +62,12 @@ class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.action_menu, menu)
+
+        val search = menu?.findItem(R.id.search_action)
+        val searchView = search.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -84,4 +91,26 @@ class ListFragment : Fragment() {
 
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null){
+            searchDatabase(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (query != null){
+            searchDatabase(query)
+        }
+        return true
+    }
+
+    private fun searchDatabase(query: String){
+        val searchQuery = "%$query%"
+        userViewModel.searchDatabase(searchQuery).observe(this, {
+            it.let { contactListAdapter.setData(it) }
+        })
+    }
+
 }
